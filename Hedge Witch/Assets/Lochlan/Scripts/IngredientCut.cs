@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class IngredientCut : MonoBehaviour
 {
-    int ingredientType;
+    
+    float ingredientType;
     public GameObject fruitHalf1;
     public GameObject fruitHalf2;
     //Remove this Camera when adding the controllers to the mechanics this is purelf for testing.
@@ -17,9 +19,9 @@ public class IngredientCut : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        ingredientType = math.round(Random.value * 10) ;
+        ingredientType = math.round(Random.value * 10.0f) ;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
