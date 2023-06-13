@@ -12,14 +12,23 @@ public class IngredientCut : MonoBehaviour
     float ingredientType;
     public GameObject fruitHalf1;
     public GameObject fruitHalf2;
+    //public GameObject ShelfScript;
     //Remove this Camera when adding the controllers to the mechanics this is purelf for testing.
     Camera cam;
     public float forceScale;
+    public float fruitLaunchVelocity;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        
+    }
     void Start()
     {
         cam = Camera.main;
-        ingredientType = math.round(Random.value * 10.0f) ;
+        ingredientType = math.round(Random.value * 10.0f);
+        this.GetComponent<Rigidbody>().velocity = new Vector3(0,fruitLaunchVelocity,0);
+        this.GetComponent <Rigidbody>().angularVelocity = new Vector3(0,fruitLaunchVelocity,0);
     }
     
     // Update is called once per frame
@@ -30,7 +39,14 @@ public class IngredientCut : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
 
-            this.SplitIngredient();
+            this.SplitIngredient();    
+        }
+
+        if(this.transform.position.y < 0)
+        {
+            Destroy(fruitHalf1);
+            Destroy(fruitHalf2);
+            Destroy(this.gameObject);
         }
     }
 
@@ -41,6 +57,8 @@ public class IngredientCut : MonoBehaviour
         float randomZ = Random.value * 2 - 1;
         Rigidbody half1 = fruitHalf1.GetComponent<Rigidbody>();
         Rigidbody half2 = fruitHalf2.GetComponent<Rigidbody>();
+
+        this.GetComponent<Rigidbody>().isKinematic = true;
 
         half1.isKinematic = false;
         half2.isKinematic = false;
@@ -55,5 +73,10 @@ public class IngredientCut : MonoBehaviour
         // with that done now we need to know where to apply the force, 
         half1.AddForceAtPosition(forceDirection + randomVariation * forceScale, fruitHalf1.transform.position);
         half2.AddForceAtPosition(-forceDirection + -randomVariation * forceScale, fruitHalf2.transform.position);
+
+        //ShelfScript.ingredientarray[ingredientType];
+        Destroy(fruitHalf1, 2.5f);
+        Destroy(fruitHalf2, 2.5f);
+        Destroy(this.gameObject, 2.5f);
     }
 }
