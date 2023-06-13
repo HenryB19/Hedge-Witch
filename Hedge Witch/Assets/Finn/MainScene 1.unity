@@ -161,14 +161,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipes:
-  - ingredient1: 0
-    ingredient2: 0
-    ingredient3: 0
-    potion: {fileID: 0}
-  - ingredient1: 0
-    ingredient2: 0
-    ingredient3: 0
-    potion: {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  potionSpawnPoint: {fileID: 0}
 --- !u!65 &441272385
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1828,12 +1823,12 @@ GameObject:
   - component: {fileID: 1847657892}
   - component: {fileID: 1847657891}
   m_Layer: 0
-  m_Name: Frog Leg
+  m_Name: IngredientTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1847657891
 MonoBehaviour:
   m_ObjectHideFlags: 0

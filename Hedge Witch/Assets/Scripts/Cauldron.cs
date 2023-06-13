@@ -15,7 +15,7 @@ public class Cauldron : MonoBehaviour
         Ingredient ingredient;
         if (other.gameObject.TryGetComponent(out ingredient))
         {
-            other.gameObject.SetActive(false);
+            other.gameObject.SetActive(false); // CHANGE TO DESTROY
             ingredientsInCauldron.Add(ingredient.type);
             if (ingredientsInCauldron.Count == 3)
             {
@@ -27,18 +27,17 @@ public class Cauldron : MonoBehaviour
                     recipeIngredients.Add(recipe.ingredient3Type);
                     recipeIngredients.Sort();
                     ingredientsInCauldron.Sort();
+
                     bool listsAreSame = false;
                     for (int i = 0; i < 3; i++)
                     {
                         if (recipeIngredients[i] == ingredientsInCauldron[i]) listsAreSame = true;
+                        else listsAreSame = false;
                     }
-                    if (listsAreSame)
-                    {
-                        Instantiate(recipe.potion, potionSpawnPoint.position, potionSpawnPoint.rotation);
-                    }
+                    if (listsAreSame) Instantiate(recipe.potion, potionSpawnPoint.position, potionSpawnPoint.rotation);
+                    else ingredientsInCauldron = new List<Ingredient.IngredientType>();
                 }
             }
         }
-        
     }
 }
