@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 135617873}
   - component: {fileID: 135617872}
   - component: {fileID: 135617871}
+  - component: {fileID: 135617874}
   m_Layer: 0
   m_Name: shelf
   m_TagString: Untagged
@@ -362,6 +363,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135617869}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &135617874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135617869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f72e535d1a0ef14cb46ce9efec73b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &194790398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1737,7 +1750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 619955097766313363, guid: 23c4dcb2a0ced2e4f85577a3fad81ac3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 619955097766313363, guid: 23c4dcb2a0ced2e4f85577a3fad81ac3, type: 3}
       propertyPath: m_LocalPosition.z

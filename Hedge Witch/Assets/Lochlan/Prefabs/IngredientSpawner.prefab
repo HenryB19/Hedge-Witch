@@ -110,5 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9dae1d527ab704fa48c530cfa0473d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientFNPrefab: {fileID: 0}
+  ingredientFNPrefab:
+  - {fileID: 9088820633015921766, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
+  - {fileID: 5854661853699935537, guid: 53de94153045ce645ac96d75c7d808f8, type: 3}
   spawnerActive: 0

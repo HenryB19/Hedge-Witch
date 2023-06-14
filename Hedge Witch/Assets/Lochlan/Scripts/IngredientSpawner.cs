@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class IngredientSpawner : MonoBehaviour
 {
-    public GameObject ingredientFNPrefab;
+
+    public GameObject[] ingredientFNPrefab;
     public bool spawnerActive;
     float timer = 0;
     float timerMax = 1;
@@ -19,7 +21,7 @@ public class IngredientSpawner : MonoBehaviour
             {
                 timer = 0;
                 timerMax = 0.5f + UnityEngine.Random.value;
-                Instantiate(ingredientFNPrefab, RandomPointInBounds(this.GetComponent<BoxCollider>().bounds), RandomRotation());
+                Instantiate(ingredientFNPrefab[(int) math.round(/*UnityEngine.Random.Range(-0.49f, 8.49f)*/ UnityEngine.Random.value)], RandomPointInBounds(this.GetComponent<BoxCollider>().bounds), RandomRotation());
             }
         }
     }
@@ -32,9 +34,9 @@ public class IngredientSpawner : MonoBehaviour
     public static Vector3 RandomPointInBounds(Bounds bounds)
     {
         return new Vector3(
-            Random.Range(bounds.min.x, bounds.max.x),
-            Random.Range(bounds.min.y, bounds.max.y),
-            Random.Range(bounds.min.z, bounds.max.z)
+            UnityEngine.Random.Range(bounds.min.x, bounds.max.x),
+            UnityEngine.Random.Range(bounds.min.y, bounds.max.y),
+            UnityEngine.Random.Range(bounds.min.z, bounds.max.z)
         );
     }
 
@@ -44,7 +46,11 @@ public class IngredientSpawner : MonoBehaviour
     /// <returns></returns>
     private Quaternion RandomRotation()
     {
-        Quaternion rotation = Quaternion.Euler(Random.Range(0.0f, 360.0f), Random.Range(0.0f, 360.0f), Random.Range(0.0f, 360.0f));
+        Quaternion rotation = Quaternion.Euler(
+            UnityEngine.Random.Range(0.0f, 360.0f), 
+            UnityEngine.Random.Range(0.0f, 360.0f), 
+            UnityEngine.Random.Range(0.0f, 360.0f)
+        );
 
         return rotation;
     }

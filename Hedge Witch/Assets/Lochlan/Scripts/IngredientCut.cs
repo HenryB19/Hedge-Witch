@@ -6,15 +6,15 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+//I've found that it would be simpler to access this with a collider and strip the information to put on the shelf to there
 public class IngredientCut : MonoBehaviour
 {
-    
-    float ingredientType;
+    public ShelfData shelfData;
+    public int ingredientType; // this should be dependent on the individual prefab.
     public GameObject fruitHalf1;
     public GameObject fruitHalf2;
     //public GameObject ShelfScript;
     //Remove this Camera when adding the controllers to the mechanics this is purelf for testing.
-    Camera cam;
     public float forceScale;
     public float fruitLaunchVelocity;
     // Start is called before the first frame update
@@ -25,10 +25,12 @@ public class IngredientCut : MonoBehaviour
     }
     void Start()
     {
-        cam = Camera.main;
-        ingredientType = math.round(Random.value * 10.0f);
+        shelfData = GameObject.Find("door").GetComponent<ShelfData>();
         this.GetComponent<Rigidbody>().velocity = new Vector3(0,fruitLaunchVelocity,0);
         this.GetComponent <Rigidbody>().angularVelocity = new Vector3(0,fruitLaunchVelocity,0);
+
+        // when we have prefab variant objects for
+
     }
     
     // Update is called once per frame
@@ -74,7 +76,8 @@ public class IngredientCut : MonoBehaviour
         half1.AddForceAtPosition(forceDirection + randomVariation * forceScale, fruitHalf1.transform.position);
         half2.AddForceAtPosition(-forceDirection + -randomVariation * forceScale, fruitHalf2.transform.position);
 
-        //ShelfScript.ingredientarray[ingredientType];
+        shelfData.ingredientList[ingredientType] += 1;
+
         Destroy(fruitHalf1, 2.5f);
         Destroy(fruitHalf2, 2.5f);
         Destroy(this.gameObject, 2.5f);
