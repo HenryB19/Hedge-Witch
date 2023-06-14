@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 135617871}
   - component: {fileID: 135617874}
   m_Layer: 0
-  m_Name: shelf
+  m_Name: Shelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -375,6 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f72e535d1a0ef14cb46ce9efec73b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ingredientList: 
 --- !u!1 &194790398
 GameObject:
   m_ObjectHideFlags: 0

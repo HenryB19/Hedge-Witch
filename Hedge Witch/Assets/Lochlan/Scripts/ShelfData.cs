@@ -14,9 +14,19 @@ public class ShelfData : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// this function removes an ingredient from the List of ingredients
+    /// </summary>
+    /// <param name="ingredientType"></param>
+    void RemoveIngredient(int ingredientType)
     {
-        
+        ingredientList[ingredientType] -= 1;
     }
+
+    bool CheckIngredientIsZero(int ingredientType)
+    {
+        return ingredientList[ingredientType] > 0;
+    }
+
+
 }

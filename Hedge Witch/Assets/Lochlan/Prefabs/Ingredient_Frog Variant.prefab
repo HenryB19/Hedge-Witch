@@ -12,6 +12,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9088820633015921764, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088820633015921764, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088820633015921764, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088820633015921764, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -57,6 +69,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9088820633015921767, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
       propertyPath: ingredientType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088820633015921767, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
+      propertyPath: knifeCutMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088820633015921767, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
+      propertyPath: ingredientTerminationHeight
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
