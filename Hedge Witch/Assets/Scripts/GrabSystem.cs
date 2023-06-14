@@ -21,6 +21,8 @@ public class GrabSystem : MonoBehaviour
     float currentObjDistance = 0.0f;
     Transform currentObjTransform;
 
+    public float maxAdjustment = 1.5f;
+    public float minAdjustment = 0.5f;
     public float distanceAdjustmentSpeed = 1.0f;
     public InputAction input;
 
@@ -36,7 +38,23 @@ public class GrabSystem : MonoBehaviour
     {
         if (!springJoint.connectedBody) return;
 
-        currentObjDistance += input.ReadValue<Vector2>().y * distanceAdjustmentSpeed * Time.deltaTime;
+        Debug.Log(currentObjDistance);
+
+        float val = input.ReadValue<Vector2>().y;
+        if (val > 0)
+        {
+            if (currentObjDistance > maxAdjustment) currentObjDistance = maxAdjustment;
+            else currentObjDistance += val * distanceAdjustmentSpeed * Time.deltaTime;
+        }
+        else
+        {
+            if (currentObjDistance < minAdjustment) currentObjDistance = minAdjustment;
+            else currentObjDistance += val * distanceAdjustmentSpeed * Time.deltaTime;
+        }
+
+        if (currentObjDistance < minAdjustment) currentObjDistance = minAdjustment;
+        else 
+
         springJoint.anchor = new Vector3(0, 0, currentObjDistance);
 
         if (atStart)
