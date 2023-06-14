@@ -3267,7 +3267,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439610513}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e988983f96fe1dd48800bcdfc82f23e9, type: 3}
   m_Name: 
@@ -3369,7 +3369,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439610513}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -3789,18 +3789,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightHand Controller
       objectReference: {fileID: 0}
-    - target: {fileID: 5056536921094611897, guid: 89765c307d49d984cbd959be7bae0990, type: 3}
-      propertyPath: maxAdjustment
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056536921094611897, guid: 89765c307d49d984cbd959be7bae0990, type: 3}
-      propertyPath: minAdjustment
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5056536921094611901, guid: 89765c307d49d984cbd959be7bae0990, type: 3}
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1951707639}
+    - target: {fileID: 5056536921094611902, guid: 89765c307d49d984cbd959be7bae0990, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056536921094611903, guid: 89765c307d49d984cbd959be7bae0990, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861279125370928208, guid: 89765c307d49d984cbd959be7bae0990, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.683
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89765c307d49d984cbd959be7bae0990, type: 3}
 --- !u!1 &1462849770
@@ -4942,6 +4946,10 @@ PrefabInstance:
     - target: {fileID: 174245890583069974, guid: e15c40ba556f6134780f8c71d73fce94, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 174245890583069974, guid: e15c40ba556f6134780f8c71d73fce94, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2450939858461989863, guid: e15c40ba556f6134780f8c71d73fce94, type: 3}
       propertyPath: m_Layer
