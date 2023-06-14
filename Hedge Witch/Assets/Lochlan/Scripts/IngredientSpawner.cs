@@ -54,4 +54,14 @@ public class IngredientSpawner : MonoBehaviour
 
         return rotation;
     }
+
+    void SetActive(bool Active)
+    {
+        spawnerActive = Active;
+    }
+
+    bool GetActive()
+    {
+        return spawnerActive;
+    }
 }

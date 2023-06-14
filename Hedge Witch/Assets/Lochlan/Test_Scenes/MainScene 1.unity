@@ -887,6 +887,26 @@ Transform:
   m_Father: {fileID: 1726308939}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -10.803, z: 0}
+--- !u!1 &389058112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d6c542420cdcd8b4587eaabb9c6bfa22, type: 3}
+  m_PrefabInstance: {fileID: 181582090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &389058113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389058112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f72e535d1a0ef14cb46ce9efec73b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientList: 
+  canvas: {fileID: 0}
+  canvasText: []
 --- !u!1 &409627205
 GameObject:
   m_ObjectHideFlags: 0
@@ -2551,6 +2571,7 @@ GameObject:
   - component: {fileID: 875937590}
   - component: {fileID: 875937589}
   - component: {fileID: 875937588}
+  - component: {fileID: 875937591}
   m_Layer: 0
   m_Name: sky light/portal
   m_TagString: Untagged
@@ -2636,6 +2657,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875937586}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &875937591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875937586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9dae1d527ab704fa48c530cfa0473d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientFNPrefab:
+  - {fileID: 9088820633015921766, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
+  - {fileID: 5854661853699935537, guid: 53de94153045ce645ac96d75c7d808f8, type: 3}
+  spawnerActive: 1
 --- !u!1 &880548253
 GameObject:
   m_ObjectHideFlags: 0
