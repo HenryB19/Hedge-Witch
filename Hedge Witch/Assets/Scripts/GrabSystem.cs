@@ -2,12 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 public class GrabSystem : MonoBehaviour
 {
     XRRayInteractor rayInteractor;
     SpringJoint springJoint;
     Rigidbody thisRB;
+
+    public Transform wandTip;
+    public GameObject particleEmmiter;
+    bool atStart;
 
     Rigidbody pickupRB;
     float pickupDrag;
@@ -25,6 +30,7 @@ public class GrabSystem : MonoBehaviour
         springJoint = GetComponent<SpringJoint>();
         thisRB = GetComponent<Rigidbody>();
         input.Enable();
+        particleEmmiter.SetActive(false);
     }
     private void Update()
     {
@@ -32,6 +38,17 @@ public class GrabSystem : MonoBehaviour
 
         currentObjDistance += input.ReadValue<Vector2>().y * distanceAdjustmentSpeed * Time.deltaTime;
         springJoint.anchor = new Vector3(0, 0, currentObjDistance);
+
+        if (atStart)
+        {
+            particleEmmiter.transform.position = pickupRB.position;
+            atStart = false;
+        }
+        else
+        {
+            particleEmmiter.transform.position = wandTip.position;
+            atStart = true;
+        }
     }
 
     public void OnSelectEntered(SelectEnterEventArgs args)
@@ -52,6 +69,8 @@ public class GrabSystem : MonoBehaviour
 
             springJoint.connectedBody = pickupRB;
             springJoint.anchor = new Vector3(0, 0, currentObjDistance);
+
+            particleEmmiter.SetActive(true);
         }
     }
 
@@ -65,6 +84,8 @@ public class GrabSystem : MonoBehaviour
         pickupRB = null;
 
         springJoint.connectedBody = null;
+
+        particleEmmiter.SetActive(false);
     }
 
     public void OnHoverEntered(HoverEnterEventArgs args)
