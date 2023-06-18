@@ -8,7 +8,7 @@ public class ShelfData : MonoBehaviour
     public List<int> ingredientList = new List<int>();
     public GameObject canvas;
     public List<TextMeshProUGUI> canvasText;
-    // Start is called before the first frame update
+    
     void Awake()
     {
         for (int i = 0; i < 8; i++)
@@ -29,9 +29,10 @@ public class ShelfData : MonoBehaviour
 
     private void Update()
     {
-        foreach (int i in ingredientList)
+        for (int i = 0; i < canvasText.Count; i++ )
         {
             canvasText[i].text = ingredientList[i].ToString();
+
         }
     }
 
@@ -44,7 +45,12 @@ public class ShelfData : MonoBehaviour
         ingredientList[ingredientType] -= 1;
     }
 
-    bool CheckIngredientIsZero(int ingredientType)
+    /// <summary>
+    /// returns true if there is an ingredient in the slot returns false if the ingredient type has zero or less held in the index.
+    /// </summary>
+    /// <param name="ingredientType"></param>
+    /// <returns></returns>
+    bool CheckIngredientIsGreaterThanZero(int ingredientType)
     {
         return ingredientList[ingredientType] > 0;
     }
