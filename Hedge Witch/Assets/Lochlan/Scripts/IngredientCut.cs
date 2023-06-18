@@ -1,15 +1,10 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 //I've found that it would be simpler to access this with a collider and strip the information to put on the shelf to there
 public class IngredientCut : MonoBehaviour
 {
-    public LayerMask knifeCutMask;
+    public int knifeCutMask;
     ShelfData shelfData;
     public int ingredientType; // this should be dependent on the individual prefab.
     public GameObject fruitHalf1;
@@ -29,8 +24,8 @@ public class IngredientCut : MonoBehaviour
     void Start()
     {
         shelfData = GameObject.Find("Shelf").GetComponent<ShelfData>();
-        this.GetComponent<Rigidbody>().velocity = new Vector3(0,fruitLaunchVelocity,0);
-        this.GetComponent <Rigidbody>().angularVelocity = new Vector3(0,fruitLaunchVelocity,0);
+        //this.GetComponent<Rigidbody>().velocity = new Vector3(0,fruitLaunchVelocity,0);
+        //this.GetComponent <Rigidbody>().angularVelocity = new Vector3(0,fruitLaunchVelocity,0);
 
         // when we have prefab variant objects for
 
@@ -62,6 +57,8 @@ public class IngredientCut : MonoBehaviour
         float randomZ = Random.value * 2 - 1;
         Rigidbody half1 = fruitHalf1.GetComponent<Rigidbody>();
         Rigidbody half2 = fruitHalf2.GetComponent<Rigidbody>();
+        fruitHalf1.GetComponent<BoxCollider>().enabled = true;
+        fruitHalf2.GetComponent<BoxCollider>().enabled = true;
 
         this.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -89,7 +86,9 @@ public class IngredientCut : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == knifeCutMask && !cut)
+        if (other.gameObject.layer == knifeCutMask)
+        {
             this.SplitIngredient();
+        }
     }
 }
