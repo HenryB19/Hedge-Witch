@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using System;
 using UnityEditor;
 
-public class WandGrabSystem : MonoBehaviour
+public class WandGrabSystem : MonoBehaviour, IPickupInputListener
 {
 
     XRRayInteractor rayInteractor;
@@ -29,10 +29,8 @@ public class WandGrabSystem : MonoBehaviour
     public float minAdjustment = 0.5f;
     public float distanceAdjustmentSpeed = 1.0f;
 
-    public InputAction joystickLeftInput;
-    public InputAction triggeLeftInput;
-    public InputAction joystickRightInput;
-    public InputAction triggerRightInput;
+    public float Trigger { get; set; }
+    public Vector2 Stick { get; set; }
 
     private void Start()
     {
@@ -41,19 +39,14 @@ public class WandGrabSystem : MonoBehaviour
         springJoint.anchor = wandTip.transform.localPosition;
         thisRB = GetComponent<Rigidbody>();
 
-        joystickLeftInput.Enable();
-        triggeLeftInput.Enable();
-        joystickRightInput.Enable();
-        triggerRightInput.Enable();
-
         particleEmmiter.SetActive(false);
     }
     private void Update()
     {
+
+        HandleInput(Stick, Trigger);
+
         if (!springJoint.connectedBody) return;
-
-        HandleInput(joystickRightInput.ReadValue<Vector2>(), triggerRightInput.ReadValue<float>());
-
         if (currentObjDistance < minAdjustment) currentObjDistance = minAdjustment;
         else springJoint.anchor = new Vector3(0, 0, currentObjDistance);
 
@@ -67,13 +60,13 @@ public class WandGrabSystem : MonoBehaviour
             particleEmmiter.transform.position = wandTip.position;
             atStart = true;
         }
-
-       
     }
 
     public void HandleInput(Vector2 joystick, float trigger)
     {
-        if (joystick.y > 0)
+        const float deadzone = 0.1f;
+
+        if (joystick.y > deadzone && heldObjectRb != null)
         {
             // if value is greater than 0 increase the current distance.
             if (currentObjDistance > maxAdjustment) currentObjDistance = maxAdjustment;
@@ -86,8 +79,9 @@ public class WandGrabSystem : MonoBehaviour
             else currentObjDistance += joystick.y * distanceAdjustmentSpeed * Time.deltaTime;
         }
 
-        if (trigger > 0 && heldObjectRb == null)
+        if (trigger > deadzone && heldObjectRb == null)
         {
+            Debug.Log("Trigger Pressed");
             // if the trigger is being pressed and we arent allready holding an object cast a ray from the wandTip.
             RaycastHit hit;
             if (!Physics.Raycast(wandTip.position, wandTip.forward, out hit, pickupRange, pickupLayer)) return; // if ray dosent hit exit early.
@@ -111,8 +105,9 @@ public class WandGrabSystem : MonoBehaviour
                 particleEmmiter.SetActive(true);
             }
         }
-        else if (trigger == 0 && heldObjectRb != null)
+        else if (trigger == deadzone && heldObjectRb != null)
         {
+            Debug.Log("Trigger Released");
             // if the trigger isnt being pressed and we are holding an object we drop the object.
 
             // set the objects old rigidbody values and sets the heldObjectRb to null.
