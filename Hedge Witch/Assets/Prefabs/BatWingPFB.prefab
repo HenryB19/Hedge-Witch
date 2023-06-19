@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8564718821079138683}
   - component: {fileID: 5798893234236001624}
   m_Layer: 0
-  m_Name: IngredientTemplate
+  m_Name: BatWingPFB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8564718821079138682}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -2934717439318261032, guid: 11bfd26eaf2708847ad0257029ccaa5a, type: 3}
 --- !u!23 &8564718821079138686
 MeshRenderer:
   m_ObjectHideFlags: 0
