@@ -61,6 +61,7 @@ public class IngredientCut : MonoBehaviour
         fruitHalf2.GetComponent<BoxCollider>().enabled = true;
 
         this.GetComponent<Rigidbody>().isKinematic = true;
+        
 
         half1.isKinematic = false;
         half2.isKinematic = false;
