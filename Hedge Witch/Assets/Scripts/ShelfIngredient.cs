@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -11,11 +8,11 @@ public class ShelfIngredient : MonoBehaviour
 
     public void OnSelectEntered(SelectEnterEventArgs args)
     {
-        GameObject prefab  = Instantiate(PrefabToInstantiate);
+        GameObject prefab  = Instantiate(PrefabToInstantiate, transform.position, transform.rotation);
         XRSimpleInteractable xrsi;
         if (prefab.TryGetComponent(out xrsi))
         {
-            xrim.ForceSelect(args.interactorObject, xrsi);
+            xrim.SelectEnter(args.interactorObject, xrsi);
         }
         else
         {
