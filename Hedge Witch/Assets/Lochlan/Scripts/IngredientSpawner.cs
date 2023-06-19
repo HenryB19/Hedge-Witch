@@ -21,7 +21,7 @@ public class IngredientSpawner : MonoBehaviour
             {
                 timer = 0;
                 timerMax = 0.5f + UnityEngine.Random.value;
-                Instantiate(ingredientFNPrefab[(int) math.round(/*UnityEngine.Random.Range(-0.49f, 8.49f)*/ UnityEngine.Random.value)], RandomPointInBounds(this.GetComponent<BoxCollider>().bounds), RandomRotation());
+                Instantiate(ingredientFNPrefab[(int) math.round(UnityEngine.Random.Range(-0.49f, 8.49f))], RandomPointInBounds(this.GetComponent<BoxCollider>().bounds), RandomRotation());
             }
         }
     }
