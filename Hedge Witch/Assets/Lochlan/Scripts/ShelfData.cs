@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static Ingredient;
 
 public class ShelfData : MonoBehaviour
 {
     public List<int> ingredientList = new List<int>();
     public GameObject canvas;
     public List<TextMeshProUGUI> canvasText;
-    
+    public List<Transform> ingredientContainers;
+
     void Awake()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 9; i++)
         {
             ingredientList.Add(0);
         }
@@ -25,35 +27,34 @@ public class ShelfData : MonoBehaviour
             canvasText.Add(GetComponentsInChildren<TextMeshProUGUI>()[i]);
         }
 
+        // GetChild 1 should correspond to the child object of Shelf, Ingredients. 
+        Transform shelfIngredients = transform.GetChild(1); ;
+        for (int i = 0; i < shelfIngredients.transform.childCount; i++)
+        {
+            ingredientContainers.Add(shelfIngredients.transform.GetChild(i));
+        }
+
     }
 
     private void Update()
     {
-        for (int i = 0; i < canvasText.Count; i++ )
+        // this will cause issues if canvasText count is different from ingredientContainers count.
+        for (int i = 0; i < canvasText.Count; i++)
         {
-            canvasText[i].text = ingredientList[i].ToString();
-
+            
+            if (ingredientList[i] <= 0)
+            {
+                ingredientContainers[i].gameObject.SetActive(false);
+                canvasText[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                ingredientContainers[i].gameObject.SetActive(true);
+                canvasText[i].gameObject.SetActive(true);
+                canvasText[i].text = ingredientList[i].ToString();
+            }
         }
+
+
     }
-
-    /// <summary>
-    /// this function removes an ingredient from the List of ingredients
-    /// </summary>
-    /// <param name="ingredientType"></param>
-    void RemoveIngredient(int ingredientType)
-    {
-        ingredientList[ingredientType] -= 1;
-    }
-
-    /// <summary>
-    /// returns true if there is an ingredient in the slot returns false if the ingredient type has zero or less held in the index.
-    /// </summary>
-    /// <param name="ingredientType"></param>
-    /// <returns></returns>
-    bool CheckIngredientIsGreaterThanZero(int ingredientType)
-    {
-        return ingredientList[ingredientType] > 0;
-    }
-
-
 }

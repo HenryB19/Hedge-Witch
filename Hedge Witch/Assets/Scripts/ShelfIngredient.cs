@@ -5,6 +5,8 @@ public class ShelfIngredient : MonoBehaviour
 {
     public GameObject PrefabToInstantiate;
     public XRInteractionManager xrim;
+    public Transform Shelf;
+    
 
     public void OnSelectEntered(SelectEnterEventArgs args)
     {
@@ -13,6 +15,7 @@ public class ShelfIngredient : MonoBehaviour
         if (prefab.TryGetComponent(out xrsi))
         {
             xrim.SelectEnter(args.interactorObject, xrsi);
+            Shelf.GetComponent<ShelfData>().ingredientList[(int)prefab.GetComponent<Ingredient>().type]--;
         }
         else
         {
