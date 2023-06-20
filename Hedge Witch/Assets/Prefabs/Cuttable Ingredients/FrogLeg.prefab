@@ -53,7 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9088820633015921766, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
       propertyPath: m_Name
-      value: IngredientParent
+      value: FrogLeg
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088820634368336664, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088820634901815561, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65948bcaba28e16438bae4af94e8b88d, type: 3}
