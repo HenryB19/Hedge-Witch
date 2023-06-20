@@ -972,18 +972,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room
       objectReference: {fileID: 0}
-    - target: {fileID: 4726672738389593475, guid: a3bf07ae84d77494a8c3c52db248a2e8, type: 3}
-      propertyPath: m_Intensity
-      value: 0.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 4726672738389593475, guid: a3bf07ae84d77494a8c3c52db248a2e8, type: 3}
-      propertyPath: m_Shadows.m_Type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4726672738389593475, guid: a3bf07ae84d77494a8c3c52db248a2e8, type: 3}
-      propertyPath: m_Shadows.m_Strength
-      value: 0.802
-      objectReference: {fileID: 0}
     - target: {fileID: 5016980432388472920, guid: a3bf07ae84d77494a8c3c52db248a2e8, type: 3}
       propertyPath: m_RootOrder
       value: 0
