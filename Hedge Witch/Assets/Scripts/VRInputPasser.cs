@@ -47,8 +47,6 @@ public sealed class VRInputPasser : MonoBehaviour
             listener.Trigger = trigger;
             listener.Stick = stick;
         }
-
-        //interactor.interactablesSelected
     }
 
     public enum Chirality
