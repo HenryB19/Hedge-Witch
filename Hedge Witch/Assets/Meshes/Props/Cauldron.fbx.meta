@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 8c1c1772254ced947909303346a72e29
+guid: 8e388c2d87900a94b9293c5cded70b3e
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gradient5
+    second: {fileID: 2100000, guid: ae04b2652020efc4c8aa96079be030a9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
