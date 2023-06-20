@@ -31,6 +31,7 @@ public sealed class VRInputPasser : MonoBehaviour
             case OculusTouchController touchController:
                 trigger = touchController.trigger.ReadValue();
                 stick = touchController.thumbstick.ReadValue();
+                
                 break;
             case OculusTouchControllerProfile.OculusTouchController touchController:
                 trigger = touchController.trigger.ReadValue();

@@ -1,58 +1,63 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.InputSystem;
-using System;
-using UnityEditor;
+
 
 public class WandGrabSystem : MonoBehaviour, IPickupInputListener
 {
-
-    XRRayInteractor rayInteractor;
-    SpringJoint springJoint;
-    Rigidbody thisRB;
-
-    public Transform wandTip;
     public GameObject particleEmmiter;
     bool atStart;
 
-    Rigidbody heldObjectRb;
-    float pickupDrag;
-    float pickupAngularDrag;
+    public Transform wandTip;
+    public Transform heldObjectAnchor;
 
-    float currentObjDistance = 0.0f;
-    Transform currentObjTransform;
+    Rigidbody heldObjRb;
+    private Vector3 heldObjVel;
+    float heldObjDist = 0.0f;
 
-    public int pickupLayer;
-    public float pickupRange = 2.0f;
+    public LayerMask pickupLayer;
+
+    public float smoothDampStrength = 1.0f;
+
+    bool wandIsHeld = false;
+
+    public float pickupRange = 1.5f;
 
     public float maxAdjustment = 1.5f;
-    public float minAdjustment = 0.5f;
+    public float minAdjustment = 0.1f;
+
     public float distanceAdjustmentSpeed = 1.0f;
-
-    public float Trigger { get; set; }
+    
     public Vector2 Stick { get; set; }
+    public float Trigger { get; set; }
 
-    private void Start()
-    {
-        rayInteractor = GetComponent<XRRayInteractor>();
-        springJoint = GetComponent<SpringJoint>();
-        springJoint.anchor = wandTip.transform.localPosition;
-        thisRB = GetComponent<Rigidbody>();
-
-        particleEmmiter.SetActive(false);
-    }
     private void Update()
     {
+        if (heldObjRb == null) return;
 
-        HandleInput(Stick, Trigger);
+        if (!wandIsHeld)
+        {
+            DropHeldObject();
+            return;
+        }
 
-        if (!springJoint.connectedBody) return;
-        if (currentObjDistance < minAdjustment) currentObjDistance = minAdjustment;
-        else springJoint.anchor = new Vector3(0, 0, currentObjDistance);
+        const float deadzone = 0.1f;
+
+        heldObjDist += Stick.y * distanceAdjustmentSpeed * Time.deltaTime;
+
+        if (Stick.y > deadzone && heldObjRb != null)
+        {
+            // if value is greater than 0 increase the current distance.
+            if (heldObjDist > maxAdjustment) heldObjDist = maxAdjustment;
+        }
+        else
+        {
+            // if value is less than 0 decrease the current distance.
+            if (heldObjDist < minAdjustment) heldObjDist = minAdjustment;
+        }
 
         if (atStart)
         {
-            particleEmmiter.transform.position = heldObjectRb.position;
+            particleEmmiter.transform.position = heldObjRb.position;
             atStart = false;
         }
         else
@@ -62,68 +67,53 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
         }
     }
 
-    public void HandleInput(Vector2 joystick, float trigger)
+    private void FixedUpdate()
     {
-        const float deadzone = 0.1f;
+        if (heldObjRb == null) return;
 
-        if (joystick.y > deadzone && heldObjectRb != null)
-        {
-            // if value is greater than 0 increase the current distance.
-            if (currentObjDistance > maxAdjustment) currentObjDistance = maxAdjustment;
-            else currentObjDistance += joystick.y * distanceAdjustmentSpeed * Time.deltaTime;
-        }
-        else
-        {
-            // if value is less than 0 decrease the current distance.
-            if (currentObjDistance < minAdjustment) currentObjDistance = minAdjustment;
-            else currentObjDistance += joystick.y * distanceAdjustmentSpeed * Time.deltaTime;
-        }
+        if (heldObjDist < minAdjustment) heldObjDist = minAdjustment;
+        else heldObjectAnchor.localPosition = new Vector3(0, 0, wandTip.localPosition.z + heldObjDist);
 
-        if (trigger > deadzone && heldObjectRb == null)
-        {
-            Debug.Log("Trigger Pressed");
-            // if the trigger is being pressed and we arent allready holding an object cast a ray from the wandTip.
-            RaycastHit hit;
-            if (!Physics.Raycast(wandTip.position, wandTip.forward, out hit, pickupRange, pickupLayer)) return; // if ray dosent hit exit early.
-            if (hit.transform.TryGetComponent(out heldObjectRb))
-            {
-                currentObjDistance = Vector3.Distance(wandTip.position, hit.transform.position);
-
-                // store current rigidbody values so we can have different values for held objects.
-                pickupDrag = heldObjectRb.drag;
-                pickupAngularDrag = heldObjectRb.angularDrag;
-
-                // set their held values.
-                heldObjectRb.drag = thisRB.drag;
-                heldObjectRb.angularDrag = thisRB.angularDrag;
-                heldObjectRb.useGravity = false;
-
-                // connect spring joint.
-                springJoint.connectedBody = heldObjectRb;
-                springJoint.anchor = new Vector3(0, 0, currentObjDistance);
-
-                particleEmmiter.SetActive(true);
-            }
-        }
-        else if (trigger == deadzone && heldObjectRb != null)
-        {
-            Debug.Log("Trigger Released");
-            // if the trigger isnt being pressed and we are holding an object we drop the object.
-
-            // set the objects old rigidbody values and sets the heldObjectRb to null.
-            heldObjectRb.drag = pickupDrag;
-            heldObjectRb.angularDrag = pickupAngularDrag;
-            heldObjectRb.useGravity = true;
-            heldObjectRb = null;
-
-            // disconnect springjoint.
-            springJoint.connectedBody = null;
-
-            particleEmmiter.SetActive(false);
-        }
+        heldObjRb.position = Vector3.SmoothDamp(heldObjRb.position, heldObjectAnchor.position, ref heldObjVel, smoothDampStrength * Time.fixedDeltaTime);
     }
+
     public void OnSelectEntered(SelectEnterEventArgs args)
     {
-        //if (args.interactorObject.)
+        wandIsHeld = true;
+    }
+    public void OnSelectExited(SelectExitEventArgs args)
+    {
+        wandIsHeld = false;
+    }
+
+    public void OnActivate(ActivateEventArgs args)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(wandTip.position, wandTip.forward, out hit, pickupRange, pickupLayer.value))
+        {
+            if (hit.transform.gameObject.TryGetComponent(out heldObjRb))
+            {
+                heldObjDist = Vector3.Distance(wandTip.position, heldObjRb.position);
+
+                particleEmmiter.SetActive(true);
+
+                heldObjRb.useGravity = false;
+            }
+        }
+    }
+    public void OnDeactivate(DeactivateEventArgs args)
+    {
+        DropHeldObject();
+    }
+
+    public void DropHeldObject()
+    {
+        if (heldObjRb == null) return;
+
+        particleEmmiter.SetActive(false);
+
+        heldObjRb.velocity = heldObjVel;
+        heldObjRb.useGravity = true;
+        heldObjRb = null;
     }
 }
