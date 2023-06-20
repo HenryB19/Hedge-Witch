@@ -3,7 +3,17 @@ guid: 92e22d339f2ccad44aaa3526c176aa27
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gradient14
+    second: {fileID: 2100000, guid: a9345501a00d6404982ba4ded6c9c43f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gradient2
+    second: {fileID: 2100000, guid: 35e40923a323e994bb14e24c106a6d82, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -66,7 +76,7 @@ ModelImporter:
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
