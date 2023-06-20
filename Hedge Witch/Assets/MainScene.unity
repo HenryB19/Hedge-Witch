@@ -858,6 +858,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5637566372193487083, guid: ed38cd67d5532244b8c890f7c96aaa42, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8592630730451675616, guid: ed38cd67d5532244b8c890f7c96aaa42, type: 3}
       propertyPath: m_Name
       value: Knife
