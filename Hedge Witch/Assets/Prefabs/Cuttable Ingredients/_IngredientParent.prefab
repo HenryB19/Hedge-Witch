@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9088820633015921765}
   - component: {fileID: 1281659971717556317}
   m_Layer: 0
-  m_Name: IngredientParent
+  m_Name: _IngredientParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   fruitHalf1: {fileID: 9088820634368336644}
   fruitHalf2: {fileID: 9088820634901815605}
   ingredientTerminationHeight: 1
-  cutForceScale: 0
+  cutForceScale: 2
   fruitLaunchVelocity: -1
 --- !u!65 &9088820633015921765
 BoxCollider:
