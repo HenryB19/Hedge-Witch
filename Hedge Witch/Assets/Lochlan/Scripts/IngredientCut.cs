@@ -19,7 +19,7 @@ public class IngredientCut : MonoBehaviour
 
     private void Awake()
     {
-        
+
     }
     void Start()
     {
@@ -30,18 +30,18 @@ public class IngredientCut : MonoBehaviour
         // when we have prefab variant objects for
 
     }
-    
+
     // Update is called once per frame
     void Update()
     {
-     
-        if (Input.GetMouseButtonDown(0) && !cut)
+
+        if (Input.GetMouseButtonDown(0))
         {
 
-            this.SplitIngredient();    
+            this.SplitIngredient();
         }
 
-        if(this.transform.position.y < ingredientTerminationHeight)
+        if (this.transform.position.y < ingredientTerminationHeight)
         {
             Destroy(fruitHalf1);
             Destroy(fruitHalf2);
@@ -51,38 +51,41 @@ public class IngredientCut : MonoBehaviour
 
     void SplitIngredient()
     {
-        cut = true;
-        float randomX = Random.value * 2 - 1;
-        float randomY = Random.value * 2 - 1;
-        float randomZ = Random.value * 2 - 1;
-        Rigidbody half1 = fruitHalf1.GetComponent<Rigidbody>();
-        Rigidbody half2 = fruitHalf2.GetComponent<Rigidbody>();
-        fruitHalf1.GetComponent<BoxCollider>().enabled = true;
-        fruitHalf2.GetComponent<BoxCollider>().enabled = true;
+        if (!cut)
+        {
+            cut = true;
+            float randomX = Random.value * 2 - 1;
+            float randomY = Random.value * 2 - 1;
+            float randomZ = Random.value * 2 - 1;
+            Rigidbody half1 = fruitHalf1.GetComponent<Rigidbody>();
+            Rigidbody half2 = fruitHalf2.GetComponent<Rigidbody>();
+            fruitHalf1.active = true;
+            fruitHalf2.active = true;
 
-        this.GetComponent<Rigidbody>().isKinematic = true;
-        this.GetComponent<BoxCollider>().enabled = false;
+            this.GetComponent<Rigidbody>().isKinematic = true;
+            this.GetComponent<BoxCollider>().enabled = false;
+            this.GetComponent<MeshRenderer>().enabled = false;
 
-        half1.isKinematic = false;
-        half2.isKinematic = false;
+            this.GetComponent<AudioSource>().Play();
 
-        // so let's run through the math for this
-        // I need to get a direction to apply the force in respect to the other half of the ingredient so I first need a unit vector
-        // between the two halves
-        Vector3 forceDirection = Vector3.Normalize(fruitHalf1.transform.position - fruitHalf2.transform.position);
-        Vector3 randomVariation = new Vector3(randomX, randomY, randomZ) * 0.1f;
-        // then scale the diretion based on the amount of force we want to apply
-        // put the finalized force scale here maybe as a random value
-        // with that done now we need to know where to apply the force, 
-        half1.AddForceAtPosition(forceDirection + randomVariation * cutForceScale, fruitHalf1.transform.position);
-        half2.AddForceAtPosition(-forceDirection + -randomVariation * cutForceScale, fruitHalf2.transform.position);
+            // so let's run through the math for this
+            // I need to get a direction to apply the force in respect to the other half of the ingredient so I first need a unit vector
+            // between the two halves
+            Vector3 forceDirection = Vector3.Normalize(fruitHalf1.transform.position - fruitHalf2.transform.position);
+            Vector3 randomVariation = new Vector3(randomX, randomY, randomZ) * 0.1f;
+            // then scale the diretion based on the amount of force we want to apply
+            // put the finalized force scale here maybe as a random value
+            // with that done now we need to know where to apply the force, 
+            half1.AddForceAtPosition(forceDirection + randomVariation * cutForceScale, fruitHalf1.transform.position);
+            half2.AddForceAtPosition(-forceDirection + -randomVariation * cutForceScale, fruitHalf2.transform.position);
 
 
-        shelfData.ingredientList[ingredientType] += 1;
+            shelfData.ingredientList[ingredientType] += 1;
 
-        Destroy(fruitHalf1, 2.5f);
-        Destroy(fruitHalf2, 2.5f);
-        Destroy(this.gameObject, 2.5f);
+            Destroy(fruitHalf1, 2.5f);
+            Destroy(fruitHalf2, 2.5f);
+            Destroy(this.gameObject, 2.5f);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -90,6 +93,7 @@ public class IngredientCut : MonoBehaviour
         if (other.gameObject.layer == knifeCutMask)
         {
             this.SplitIngredient();
+
         }
     }
 }
