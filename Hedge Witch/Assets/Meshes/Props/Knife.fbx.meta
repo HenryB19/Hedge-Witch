@@ -8,17 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: gradient2
-    second: {fileID: 2100000, guid: 35e40923a323e994bb14e24c106a6d82, type: 2}
+    second: {fileID: 2100000, guid: f3793bcde8bfc2441a18c6995c365ac3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: gradient7
-    second: {fileID: 2100000, guid: 9f11a3512c22e5246ae60563f484137f, type: 2}
+    second: {fileID: 2100000, guid: f3793bcde8bfc2441a18c6995c365ac3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: gradient9
-    second: {fileID: 2100000, guid: f2e64c2a302acc649a51115831c09c3a, type: 2}
+    second: {fileID: 2100000, guid: f3793bcde8bfc2441a18c6995c365ac3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
