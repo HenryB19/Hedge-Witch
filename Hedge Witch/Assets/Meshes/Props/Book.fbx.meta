@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 631816294f529fb4289276084accff3d
+guid: 8c1c1772254ced947909303346a72e29
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gradient11
+    second: {fileID: 2100000, guid: e58f8f967ad623046befc795605cf653, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gradient13
+    second: {fileID: 2100000, guid: e58f8f967ad623046befc795605cf653, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gradient9
+    second: {fileID: 2100000, guid: e58f8f967ad623046befc795605cf653, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

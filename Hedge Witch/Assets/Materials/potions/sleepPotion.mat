@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: sleepPotion
+  m_Shader: {fileID: -6465566751694194690, guid: e1f529fd1f26f6341b737cecf97b1b6f, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2999
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _ParallaxMapping_4117b5d5201d4e70b526d6b5dfb48f60_Heightmap_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _gradient:
+        m_Texture: {fileID: 2800000, guid: d9ed0c5d82433bd4abab075a16f24e99, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _sparklesMap:
+        m_Texture: {fileID: 2800000, guid: e84d91965c140d149b7b5eb185e293d8, type: 3}
+        m_Scale: {x: 48, y: 13}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _FillAmount: 0
+    - _QueueControl: 1
+    - _QueueOffset: 0
+    - _WobbleX: -0.0023346206
+    - _WobbleZ: -0.0023992986
+    - _aaa: 10.26
+    - _bbb: 28.23
+    - _faceValue: 0
+    - _fill: 0.44
+    - _fillBalance: 0.17
+    - _fillContrast: 0.71
+    - _fresnel_power: 2.94
+    - _gradientBalance: -0.07
+    - _gradientContrast: 3.58
+    - _scroll_angle: 83.3
+    - _sparkleVBalance: 0.1
+    - _sparkleVContrast: 6.01
+    - _sparkle_power: 3000
+    - _sparkle_random: 2.2
+    - _swirlGradientBalance: 0.03
+    - _swirlGradientContrast: 5
+    - _topValue: 0.383
+    - _ujeheheheh: 3.95
+    - _waveAmplitude: 0.1
+    - _waveFrequency: 3.58
+    m_Colors:
+    - _FillAmount: {r: 0, g: -0.4821105, b: 0.0000018924475, a: 0}
+    - _face: {r: 0.735849, g: 0.10065857, b: 0.23895985, a: 0}
+    - _fresnel_color: {r: 0.32961905, g: 0.36124596, b: 0.8867924, a: 0}
+    - _top: {r: 0.8490566, g: 0.34957886, b: 0.27634388, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &893346403001330107
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 6
