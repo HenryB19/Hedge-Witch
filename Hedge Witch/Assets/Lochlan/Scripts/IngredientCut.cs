@@ -18,6 +18,7 @@ public class IngredientCut : MonoBehaviour
 
     void Start()
     {
+        // I believe there should be a way to pass in a reference when instantiating an object should in theory be better than running Find.
         shelfData = GameObject.Find("Shelf").GetComponent<ShelfData>();
 
 
@@ -66,10 +67,10 @@ public class IngredientCut : MonoBehaviour
             Vector3 randomVariation = new Vector3(randomX, randomY, randomZ) * 0.1f;
             // then scale the diretion based on the amount of force we want to apply
             // put the finalized force scale here maybe as a random value
-            // with that done now we need to know where to apply the force, 
-            half1.AddForceAtPosition(forceDirection + randomVariation * cutForceScale, ingredientHalf1.transform.position);
-            half2.AddForceAtPosition(-forceDirection + -randomVariation * cutForceScale, ingredientHalf2.transform.position);
-
+            // with that done now we need to know where to apply the force,
+            
+            half1.AddForceAtPosition((forceDirection + randomVariation) * cutForceScale, ingredientHalf1.transform.position);
+            half2.AddForceAtPosition((-forceDirection + -randomVariation) * cutForceScale, ingredientHalf2.transform.position);
 
             shelfData.ingredientList[ingredientType] += 1;
 
