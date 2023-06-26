@@ -12,11 +12,19 @@ public class Cauldron : MonoBehaviour
     public Transform sleepPotionSpawnPoint;
     public Transform truthPotionSpawnPoint;
 
+    public AudioSource splashSource;
+    public AudioSource ingredientSoundSource;
+
+
     private void OnTriggerEnter(Collider other)
     {
         Ingredient ingredient;
         if (other.gameObject.TryGetComponent(out ingredient))
         {
+            ingredientSoundSource.clip = ingredient.droppedInCauldronSound; 
+            ingredientSoundSource.Play();
+            splashSource.Play();
+
             other.gameObject.SetActive(false); // CHANGE TO DESTROY
             ingredientsInCauldron.Add(ingredient.type);
             if (ingredientsInCauldron.Count == 3)

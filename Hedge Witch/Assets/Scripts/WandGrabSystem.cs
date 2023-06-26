@@ -11,6 +11,7 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
     public Transform wandTip;
     public Transform heldObjectAnchor;
 
+    Ingredient heldIngredient;
     Rigidbody heldObjRb;
     private Vector3 heldObjVel;
     float heldObjDist = 0.0f;
@@ -94,22 +95,15 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
         ShelfIngredient shelfIngredient;
         if (Physics.Raycast(wandTip.position, wandTip.forward, out hit, pickupRange, pickupLayer.value))
         {
-            if (hit.transform.gameObject.TryGetComponent(out heldObjRb))
-            {
-                HoldObject();
-            }
+            HoldObject(hit.transform.gameObject);
         }
         else if(Physics.Raycast(wandTip.position, wandTip.forward, out hit, pickupRange, shelfObjLayer.value))
         {
             if (hit.transform.gameObject.TryGetComponent(out shelfIngredient))
             {
-                GameObject prefab = Instantiate(shelfIngredient.PrefabToInstantiate, shelfIngredient.transform.position, shelfIngredient.transform.rotation);
+                HoldObject(Instantiate(shelfIngredient.PrefabToInstantiate, shelfIngredient.transform.position, shelfIngredient.transform.rotation));
 
-                heldObjRb = prefab.GetComponent<Rigidbody>();
-
-                HoldObject();
-
-                shelfIngredient.RemoveFromShelf(prefab.GetComponent<Ingredient>().type);
+                shelfIngredient.RemoveFromShelf(heldIngredient.type);
             }
         }
     }
@@ -117,8 +111,13 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
     {
         DropHeldObject();
     }
-    public void HoldObject()
+    public void HoldObject(GameObject obj)
     {
+        heldObjRb = obj.GetComponent<Rigidbody>();
+        heldIngredient = obj.GetComponent<Ingredient>();
+
+        heldIngredient.PlaySoundOnCollision(false);
+
         heldObjDist = Vector3.Distance(wandTip.position, heldObjRb.position);
 
         particleEmmiter.SetActive(true);
@@ -130,6 +129,8 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
     {
         if (heldObjRb == null) return;
 
+        heldIngredient.PlaySoundOnCollision(true);
+        heldIngredient = null;
         particleEmmiter.SetActive(false);
 
         heldObjRb.velocity = heldObjVel;
