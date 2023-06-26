@@ -9,8 +9,10 @@ public class IngredientSpawner : MonoBehaviour
 
     public GameObject[] ingredientFNPrefab;
     public bool spawnerActive;
+    public float minSpawnTime = 0.5f;
     float timer = 0;
     float timerMax = 1;
+    
     // Update is called once per frame
     void Update()
     {
@@ -20,7 +22,7 @@ public class IngredientSpawner : MonoBehaviour
             if (timer > timerMax)
             {
                 timer = 0;
-                timerMax = 0.5f + UnityEngine.Random.value;
+                timerMax = minSpawnTime + UnityEngine.Random.value;
                 Instantiate(ingredientFNPrefab[(int) math.round(UnityEngine.Random.Range(-0.49f, 8.49f))], RandomPointInBounds(this.GetComponent<BoxCollider>().bounds), RandomRotation());
             }
         }

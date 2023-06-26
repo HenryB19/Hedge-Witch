@@ -87,7 +87,7 @@ MonoBehaviour:
   ingredientHalf2: {fileID: 9088820634901815605}
   ingredientWhole: {fileID: 2148671300053657174}
   ingredientTerminationHeight: 1
-  cutForceScale: 2
+  cutForceScale: 20
   fruitLaunchVelocity: -1
 --- !u!65 &9088820633015921765
 BoxCollider:
