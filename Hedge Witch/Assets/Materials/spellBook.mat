@@ -44,10 +44,10 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _page: 0.53
+    - _page: 0.47
     - _smoothness: 0
     m_Colors:
-    - _writing_color: {r: 0.3490566, g: 0.21205905, b: 0.07046991, a: 0}
+    - _writing_color: {r: 0.34901962, g: 0.14172253, b: 0.07058824, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4393560739415574138
 MonoBehaviour:
