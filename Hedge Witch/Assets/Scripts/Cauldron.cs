@@ -8,7 +8,9 @@ public class Cauldron : MonoBehaviour
 
     public List<Recipe> recipes = new List<Recipe>();
 
-    public Transform potionSpawnPoint;
+    public Transform lovePotionSpawnPoint;
+    public Transform sleepPotionSpawnPoint;
+    public Transform truthPotionSpawnPoint;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +21,7 @@ public class Cauldron : MonoBehaviour
             ingredientsInCauldron.Add(ingredient.type);
             if (ingredientsInCauldron.Count == 3)
             {
+                int z = 0;
                 foreach (Recipe recipe in recipes)
                 {
                     List<Ingredient.IngredientType> recipeIngredients = new List<Ingredient.IngredientType>();
@@ -29,14 +32,25 @@ public class Cauldron : MonoBehaviour
                     ingredientsInCauldron.Sort();
 
                     bool listsAreSame = false;
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < ingredientsInCauldron.Count; i++)
                     {
                         if (recipeIngredients[i] == ingredientsInCauldron[i]) listsAreSame = true;
                         else listsAreSame = false;
                     }
-                    if (listsAreSame) Instantiate(recipe.potion, potionSpawnPoint.position, potionSpawnPoint.rotation);
-                    else ingredientsInCauldron = new List<Ingredient.IngredientType>();
+                    
+                    if (!listsAreSame)
+                    {
+                       
+                        z++;
+                        continue;
+                    }
+
+                    Transform thisPos = lovePotionSpawnPoint;
+                    if (z == 1) thisPos = sleepPotionSpawnPoint;
+                    else if (z == 2) thisPos = truthPotionSpawnPoint;
+                    Instantiate(recipe.potion, thisPos.position, thisPos.rotation);
                 }
+                ingredientsInCauldron = new List<Ingredient.IngredientType>();
             }
         }
     }
