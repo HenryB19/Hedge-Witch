@@ -16,4 +16,7 @@ public class Ingredient : MonoBehaviour
     }
 
     public IngredientType type;
+    public AudioClip audio;
+    
+
 }
