@@ -83,8 +83,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knifeCutMask: 8
   ingredientType: 0
-  fruitHalf1: {fileID: 9088820634368336644}
-  fruitHalf2: {fileID: 9088820634901815605}
+  ingredientHalf1: {fileID: 9088820634368336644}
+  ingredientHalf2: {fileID: 9088820634901815605}
+  ingredientWhole: {fileID: 2148671300053657174}
   ingredientTerminationHeight: 1
   cutForceScale: 2
   fruitLaunchVelocity: -1
