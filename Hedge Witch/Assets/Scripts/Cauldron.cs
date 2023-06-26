@@ -32,7 +32,7 @@ public class Cauldron : MonoBehaviour
                     ingredientsInCauldron.Sort();
 
                     bool listsAreSame = false;
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < ingredientsInCauldron.Count; i++)
                     {
                         if (recipeIngredients[i] == ingredientsInCauldron[i]) listsAreSame = true;
                         else listsAreSame = false;
@@ -40,7 +40,7 @@ public class Cauldron : MonoBehaviour
                     
                     if (!listsAreSame)
                     {
-                        ingredientsInCauldron = new List<Ingredient.IngredientType>();
+                       
                         z++;
                         continue;
                     }
@@ -50,6 +50,7 @@ public class Cauldron : MonoBehaviour
                     else if (z == 2) thisPos = truthPotionSpawnPoint;
                     Instantiate(recipe.potion, thisPos.position, thisPos.rotation);
                 }
+                ingredientsInCauldron = new List<Ingredient.IngredientType>();
             }
         }
     }
