@@ -15,4 +15,4 @@ MonoBehaviour:
   ingredient1Type: 2
   ingredient2Type: 6
   ingredient3Type: 0
-  potion: {fileID: 6833938069007690840, guid: 5accc8a829c3ad44e89505f947efef83, type: 3}
+  potion: {fileID: 2013380081179527259, guid: 720ffd2026abba44c99e7ecefa777402, type: 3}
