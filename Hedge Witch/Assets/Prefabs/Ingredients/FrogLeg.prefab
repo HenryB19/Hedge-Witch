@@ -124,6 +124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FrogLeg
       objectReference: {fileID: 0}
+    - target: {fileID: 8564718821079138684, guid: bb6b709c2728274438395f7779315b03, type: 3}
+      propertyPath: droppedInCauldronSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 03f94bc6ab434ea41a1413892a535195, type: 3}
     - target: {fileID: 8564718821079138686, guid: bb6b709c2728274438395f7779315b03, type: 3}
       propertyPath: m_Enabled
       value: 0

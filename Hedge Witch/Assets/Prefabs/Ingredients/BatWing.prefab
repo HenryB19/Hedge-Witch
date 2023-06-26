@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8564718821079138684, guid: bb6b709c2728274438395f7779315b03, type: 3}
+      propertyPath: droppedInCauldronSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fb5c1a42c73957e4aae3fcc32b3ee644, type: 3}
     - target: {fileID: 8564718821079138686, guid: bb6b709c2728274438395f7779315b03, type: 3}
       propertyPath: m_Enabled
       value: 0
