@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -15,6 +16,7 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
     float heldObjDist = 0.0f;
 
     public LayerMask pickupLayer;
+    public LayerMask shelfObjLayer;
 
     public float smoothDampStrength = 1.0f;
 
@@ -89,21 +91,39 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
     public void OnActivate(ActivateEventArgs args)
     {
         RaycastHit hit;
+        ShelfIngredient shelfIngredient;
         if (Physics.Raycast(wandTip.position, wandTip.forward, out hit, pickupRange, pickupLayer.value))
         {
             if (hit.transform.gameObject.TryGetComponent(out heldObjRb))
             {
-                heldObjDist = Vector3.Distance(wandTip.position, heldObjRb.position);
+                HoldObject();
+            }
+        }
+        else if(Physics.Raycast(wandTip.position, wandTip.forward, out hit, pickupRange, shelfObjLayer.value))
+        {
+            if (hit.transform.gameObject.TryGetComponent(out shelfIngredient))
+            {
+                GameObject prefab = Instantiate(shelfIngredient.PrefabToInstantiate, shelfIngredient.transform.position, shelfIngredient.transform.rotation);
 
-                particleEmmiter.SetActive(true);
+                heldObjRb = prefab.GetComponent<Rigidbody>();
 
-                heldObjRb.useGravity = false;
+                HoldObject();
+
+                shelfIngredient.RemoveFromShelf(prefab.GetComponent<Ingredient>().type);
             }
         }
     }
     public void OnDeactivate(DeactivateEventArgs args)
     {
         DropHeldObject();
+    }
+    public void HoldObject()
+    {
+        heldObjDist = Vector3.Distance(wandTip.position, heldObjRb.position);
+
+        particleEmmiter.SetActive(true);
+
+        heldObjRb.useGravity = false;
     }
 
     public void DropHeldObject()

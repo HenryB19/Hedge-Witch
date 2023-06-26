@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8564718821079138685}
   - component: {fileID: 8564718821079138683}
   - component: {fileID: 6716984138716317408}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: _ShelfInteractable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
