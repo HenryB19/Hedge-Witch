@@ -16,7 +16,23 @@ public class Ingredient : MonoBehaviour
     }
 
     public IngredientType type;
-    public AudioClip audio;
-    
+    public AudioClip droppedInCauldronSound;
+    public AudioSource droppedSound;
+
+    bool playSoundOnCollision;
+    public void PlaySoundOnCollision(bool b)
+    {
+        playSoundOnCollision = b;
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (playSoundOnCollision)
+        {
+            droppedSound.Play();
+            playSoundOnCollision = false;
+        }
+    }
 
 }

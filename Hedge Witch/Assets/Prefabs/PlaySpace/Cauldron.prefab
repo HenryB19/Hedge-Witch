@@ -110,6 +110,8 @@ MonoBehaviour:
   lovePotionSpawnPoint: {fileID: 2070670320946821918}
   sleepPotionSpawnPoint: {fileID: 6243963096327611939}
   truthPotionSpawnPoint: {fileID: 7090468145038669431}
+  splashSource: {fileID: 0}
+  ingredientSoundSource: {fileID: 0}
 --- !u!65 &1607670146427165127
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -121,8 +123,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.81515604, y: 0.78315896, z: 0.8247001}
-  m_Center: {x: -0.0041440427, y: 0.38597706, z: 0.7638191}
+  m_Size: {x: 0.6693405, y: 0.78315896, z: 0.6710026}
+  m_Center: {x: -0.00020307302, y: 0.38597706, z: 0.76184857}
 --- !u!1 &3628078384249373796
 GameObject:
   m_ObjectHideFlags: 0
