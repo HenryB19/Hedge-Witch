@@ -9,10 +9,11 @@ public class IngredientSpawner : MonoBehaviour
 
     public GameObject[] ingredientFNPrefab;
     public bool spawnerActive;
+    public bool spawnTimeRandomVal0To1;
     public float minSpawnTime = 0.5f;
     float timer = 0;
     float timerMax = 1;
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -22,8 +23,11 @@ public class IngredientSpawner : MonoBehaviour
             if (timer > timerMax)
             {
                 timer = 0;
-                timerMax = minSpawnTime + UnityEngine.Random.value;
-                Instantiate(ingredientFNPrefab[(int) math.round(UnityEngine.Random.Range(-0.49f, 8.49f))], RandomPointInBounds(this.GetComponent<BoxCollider>().bounds), RandomRotation());
+                if (spawnTimeRandomVal0To1) // if random active add a random amount of time between zero and 1 second to spawn time
+                    timerMax = minSpawnTime + UnityEngine.Random.value;
+                else 
+                    timerMax = minSpawnTime;
+                Instantiate(ingredientFNPrefab[(int)math.round(UnityEngine.Random.Range(-0.49f, 8.49f))], RandomPointInBounds(this.GetComponent<BoxCollider>().bounds), RandomRotation());
             }
         }
     }
@@ -49,8 +53,8 @@ public class IngredientSpawner : MonoBehaviour
     private Quaternion RandomRotation()
     {
         Quaternion rotation = Quaternion.Euler(
-            UnityEngine.Random.Range(0.0f, 360.0f), 
-            UnityEngine.Random.Range(0.0f, 360.0f), 
+            UnityEngine.Random.Range(0.0f, 360.0f),
+            UnityEngine.Random.Range(0.0f, 360.0f),
             UnityEngine.Random.Range(0.0f, 360.0f)
         );
 
