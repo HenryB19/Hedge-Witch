@@ -10,13 +10,26 @@ public class Cauldron : MonoBehaviour
 
     public Transform potionSpawnPoint;
 
+    public AudioSource splashSource;
+    public AudioSource ingSource;
+    public AudioClip currentIngClip;
+
+
     private void OnTriggerEnter(Collider other)
     {
         Ingredient ingredient;
         if (other.gameObject.TryGetComponent(out ingredient))
         {
-            other.gameObject.SetActive(false); // CHANGE TO DESTROY
+            currentIngClip = ingredient.audio;
+            ingSource.clip = currentIngClip; 
+            ingSource.Play();
+
+
+
+            Debug.Log(ingredient);
+            //other.gameObject.SetActive(false); // CHANGE TO DESTROY
             ingredientsInCauldron.Add(ingredient.type);
+            
             if (ingredientsInCauldron.Count == 3)
             {
                 foreach (Recipe recipe in recipes)
