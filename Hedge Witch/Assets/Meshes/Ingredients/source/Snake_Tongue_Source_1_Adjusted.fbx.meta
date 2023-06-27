@@ -12,6 +12,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: gradient28
+    second: {fileID: 2100000, guid: f3793bcde8bfc2441a18c6995c365ac3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gradient29
+    second: {fileID: 2100000, guid: f3793bcde8bfc2441a18c6995c365ac3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: gradient3
     second: {fileID: 2100000, guid: f3793bcde8bfc2441a18c6995c365ac3, type: 2}
   materials:
