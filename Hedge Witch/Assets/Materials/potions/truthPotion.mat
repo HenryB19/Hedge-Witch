@@ -57,8 +57,8 @@ Material:
     - _FillAmount: 0
     - _QueueControl: 1
     - _QueueOffset: 0
-    - _WobbleX: -0.002876165
-    - _WobbleZ: 0.000653448
+    - _WobbleX: -0.00037524034
+    - _WobbleZ: 0.00043352
     - _faceValue: 0
     - _fill: 0.44
     - _fillBalance: 0.17
@@ -73,7 +73,7 @@ Material:
     - _waveAmplitude: 0.1
     - _waveFrequency: 3.58
     m_Colors:
-    - _FillAmount: {r: -0.00000029802322, g: -0.4604583, b: 0.00000047683716, a: 0}
+    - _FillAmount: {r: 0.00000029802322, g: -0.46045828, b: -0.00000047683716, a: 0}
     - _face: {r: 0.735849, g: 0.10065857, b: 0.23895985, a: 0}
     - _fresnel_color: {r: 0.9784185, g: 1, b: 0.5509434, a: 0}
     - _top: {r: 0.8490566, g: 0.34957886, b: 0.27634388, a: 0}
