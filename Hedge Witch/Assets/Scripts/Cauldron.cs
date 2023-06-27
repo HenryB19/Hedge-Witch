@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 public class Cauldron : MonoBehaviour
 {
     private List<Ingredient.IngredientType> ingredientsInCauldron = new List<Ingredient.IngredientType>();
@@ -22,57 +23,58 @@ public class Cauldron : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        splashParticle.Play();
         Ingredient ingredient;
         if (other.gameObject.TryGetComponent(out ingredient))
         {
             ingredientSoundSource.clip = ingredient.droppedInCauldronSound; 
             ingredientSoundSource.Play();
+            splashParticle.Play();
             splashSource.Play();
 
             other.gameObject.SetActive(false); // CHANGE TO DESTROY
             ingredientsInCauldron.Add(ingredient.type);
             if (ingredientsInCauldron.Count == 3)
             {
-                int z = 0;
-                foreach (Recipe recipe in recipes)
+                for (int r = 0; r < 3; r++)
                 {
                     List<Ingredient.IngredientType> recipeIngredients = new List<Ingredient.IngredientType>();
-                    recipeIngredients.Add(recipe.ingredient1Type);
-                    recipeIngredients.Add(recipe.ingredient2Type);
-                    recipeIngredients.Add(recipe.ingredient3Type);
+                    recipeIngredients.Add(recipes[r].ingredient1Type);
+                    recipeIngredients.Add(recipes[r].ingredient2Type);
+                    recipeIngredients.Add(recipes[r].ingredient3Type);
                     recipeIngredients.Sort();
                     ingredientsInCauldron.Sort();
 
-                    bool listsAreSame = false;
-                    for (int i = 0; i < ingredientsInCauldron.Count; i++)
+                    if (
+                        recipeIngredients[0] == ingredientsInCauldron[0] &&
+                        recipeIngredients[1] == ingredientsInCauldron[1] &&
+                        recipeIngredients[2] == ingredientsInCauldron[2]
+                        )
                     {
-                        if (recipeIngredients[i] == ingredientsInCauldron[i])
+                        Transform thisPos = lovePotionSpawnPoint;
+                        switch (r)
                         {
-                            listsAreSame = true;
-                            potionParticle.Play();
+                            case 1:
+                                thisPos = sleepPotionSpawnPoint;
+                                break;
+                            case 2:
+                                thisPos = truthPotionSpawnPoint;
+                                break;
                         }
-                        else
-                        {
-                            listsAreSame = false;
-                            failParticle.Play();
-                        }
-                    }
-                    
-                    if (!listsAreSame)
-                    {
-                       
-                        z++;
-                        continue;
-                    }
+                        Instantiate(recipes[r].potion, thisPos.position, thisPos.rotation);
+                        potionParticle.Play();
 
-                    Transform thisPos = lovePotionSpawnPoint;
-                    if (z == 1) thisPos = sleepPotionSpawnPoint;
-                    else if (z == 2) thisPos = truthPotionSpawnPoint;
-                    Instantiate(recipe.potion, thisPos.position, thisPos.rotation);
+                        ingredientsInCauldron = new List<Ingredient.IngredientType>();
+                        return;
+                    }
                 }
+                failParticle.Play();
                 ingredientsInCauldron = new List<Ingredient.IngredientType>();
             }
+        }
+        else
+        {
+            Vector3 dir = new Vector3(Random.Range(-1, 1), Random.Range(0.5f, 1), Random.Range(-1, 1));
+            other.attachedRigidbody.AddForce(dir * 10, ForceMode.Impulse);
         }
     }
 }
