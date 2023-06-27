@@ -44,7 +44,7 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _page: 0
+    - _page: 1
     - _smoothness: 0
     m_Colors:
     - _writing_color: {r: 0.34901962, g: 0.14172253, b: 0.07058824, a: 0}
