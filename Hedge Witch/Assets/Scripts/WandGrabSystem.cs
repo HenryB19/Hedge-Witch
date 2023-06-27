@@ -1,5 +1,8 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
 
@@ -21,8 +24,6 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
 
     public float smoothDampStrength = 1.0f;
 
-    bool wandIsHeld = false;
-
     public float pickupRange = 1.5f;
 
     public float maxAdjustment = 1.5f;
@@ -35,13 +36,16 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
 
     XRSimpleInteractable currentHovered;
 
+    PlayerInput playerInput;
+    InputActionMap map;
+
+    private void Start()
+    {
+        map = playerInput.actions.FindActionMap("XRI RightHand Interaction");
+    }
+
     private void Update()
     {
-        if (!wandIsHeld)
-        {
-            if (heldObjRb != null) DropHeldObject();
-            return;
-        }
 
         RaycastHit hit;
         if (Physics.Raycast(wandTip.position, wandTip.forward, out hit, pickupRange, shelfObjLayer.value))
@@ -93,57 +97,42 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
         heldObjRb.position = Vector3.SmoothDamp(heldObjRb.position, heldObjectAnchor.position, ref heldObjVel, smoothDampStrength * Time.fixedDeltaTime);
     }
 
+    public void Joystick()
+    {
+
+    }
+
     public void OnSelectEntered(SelectEnterEventArgs args)
     {
-        wandIsHeld = true;
-    }
-    public void OnSelectExited(SelectExitEventArgs args)
-    {
-        wandIsHeld = false;
-    }
-
-    public void OnActivate(ActivateEventArgs args)
-    {
-        RaycastHit hit;
-        ShelfIngredient shelfIngredient;
-        if (Physics.Raycast(wandTip.position, wandTip.forward, out hit, pickupRange, pickupLayer.value))
+        GameObject obj;
+        ShelfIngredient si;
+        if (args.interactableObject.transform.TryGetComponent(out si))
         {
-            HoldObject(hit.transform.gameObject);
+            obj = si.TakeObject();
+            heldIngredient = obj.GetComponent<Ingredient>();
+            heldIngredient.PlaySoundOnCollision(false);
         }
-        else if(Physics.Raycast(wandTip.position, wandTip.forward, out hit, pickupRange, shelfObjLayer.value))
+        else
         {
-            if (hit.transform.gameObject.TryGetComponent(out shelfIngredient))
-            {
-                HoldObject(Instantiate(shelfIngredient.PrefabToInstantiate, shelfIngredient.transform.position, shelfIngredient.transform.rotation));
-
-                shelfIngredient.RemoveFromShelf(heldIngredient.type);
-            }
+            obj = args.interactableObject.transform.gameObject;
         }
-    }
-    public void OnDeactivate(DeactivateEventArgs args)
-    {
-        DropHeldObject();
-    }
-    public void HoldObject(GameObject obj)
-    {
+
         heldObjRb = obj.GetComponent<Rigidbody>();
-        heldIngredient = obj.GetComponent<Ingredient>();
-
-        heldIngredient.PlaySoundOnCollision(false);
 
         heldObjDist = Vector3.Distance(wandTip.position, heldObjRb.position);
 
         particleEmmiter.SetActive(true);
 
         heldObjRb.useGravity = false;
+
     }
-
-    public void DropHeldObject()
+    public void OnSelectExited(SelectExitEventArgs args)
     {
-        if (heldObjRb == null) return;
-
-        heldIngredient.PlaySoundOnCollision(true);
-        heldIngredient = null;
+        if (heldIngredient != null)
+        {
+            heldIngredient.PlaySoundOnCollision(true);
+            heldIngredient = null;
+        }
         particleEmmiter.SetActive(false);
 
         heldObjRb.velocity = heldObjVel;
