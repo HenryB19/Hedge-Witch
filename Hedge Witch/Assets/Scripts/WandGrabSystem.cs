@@ -33,15 +33,28 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
     public Vector2 Stick { get; set; }
     public float Trigger { get; set; }
 
+    XRSimpleInteractable currentHovered;
+
     private void Update()
     {
-        if (heldObjRb == null) return;
-
         if (!wandIsHeld)
         {
-            DropHeldObject();
+            if (heldObjRb != null) DropHeldObject();
             return;
         }
+
+        RaycastHit hit;
+        if (Physics.Raycast(wandTip.position, wandTip.forward, out hit, pickupRange, shelfObjLayer.value))
+        {
+            currentHovered = hit.transform.GetComponent<XRSimpleInteractable>();
+            currentHovered.hoverEntered.Invoke(new HoverEnterEventArgs());
+        }
+        else
+        {
+            if (currentHovered != null) currentHovered.hoverExited.Invoke(new HoverExitEventArgs());
+        }
+
+        if (heldObjRb == null) return;
 
         const float deadzone = 0.1f;
 
