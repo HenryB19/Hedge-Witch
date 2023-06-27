@@ -41,8 +41,13 @@ Material:
     - _FillAmount: 0
     - _QueueControl: 1
     - _QueueOffset: 0
+<<<<<<< Updated upstream
     - _WobbleX: -0.020070875
     - _WobbleZ: 0.006841754
+=======
+    - _WobbleX: 0.0006270942
+    - _WobbleZ: 0.0006270942
+>>>>>>> Stashed changes
     - _faceValue: 0
     - _fill: 0.44
     - _fillBalance: 0.17
