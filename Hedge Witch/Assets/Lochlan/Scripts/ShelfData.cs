@@ -60,7 +60,7 @@ public class ShelfData : MonoBehaviour
                 hoveredItemLabel = "Rose Thorn";
                 break;
             case 5:
-                hoveredItemLabel = "Odd Mushroom";
+                hoveredItemLabel = "Midnight Mushroom";
                 break;
             case 6:
                 hoveredItemLabel = "Unicorn Blood";
