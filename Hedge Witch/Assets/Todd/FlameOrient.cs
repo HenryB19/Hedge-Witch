@@ -13,7 +13,6 @@ public class FlameOrient : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (mainCam != null) {
-            mainCam = view.camera;
             Vector3 camPos = mainCam.transform.position;
             camPos.y = transform.position.y;
             transform.LookAt(camPos);
