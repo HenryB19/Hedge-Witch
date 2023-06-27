@@ -15,9 +15,14 @@ public class Cauldron : MonoBehaviour
     public AudioSource splashSource;
     public AudioSource ingredientSoundSource;
 
+    public ParticleSystem potionParticle;
+    public ParticleSystem failParticle;
+    public ParticleSystem splashParticle;
+
 
     private void OnTriggerEnter(Collider other)
     {
+        splashParticle.Play();
         Ingredient ingredient;
         if (other.gameObject.TryGetComponent(out ingredient))
         {
@@ -42,8 +47,16 @@ public class Cauldron : MonoBehaviour
                     bool listsAreSame = false;
                     for (int i = 0; i < ingredientsInCauldron.Count; i++)
                     {
-                        if (recipeIngredients[i] == ingredientsInCauldron[i]) listsAreSame = true;
-                        else listsAreSame = false;
+                        if (recipeIngredients[i] == ingredientsInCauldron[i])
+                        {
+                            listsAreSame = true;
+                            potionParticle.Play();
+                        }
+                        else
+                        {
+                            listsAreSame = false;
+                            failParticle.Play();
+                        }
                     }
                     
                     if (!listsAreSame)
