@@ -41,8 +41,8 @@ Material:
     - _FillAmount: 0
     - _QueueControl: 1
     - _QueueOffset: 0
-    - _WobbleX: -0.00016014054
-    - _WobbleZ: -0.00016014054
+    - _WobbleX: -0.00006684552
+    - _WobbleZ: -0.00006637574
     - _faceValue: 0
     - _fill: 0.44
     - _fillBalance: 0.17
