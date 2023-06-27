@@ -16,6 +16,8 @@ public class Cauldron : MonoBehaviour
     public AudioSource splashSource;
     public AudioSource ingredientSoundSource;
     public AudioSource successSource;
+    public AudioSource failureSource;
+
 
     public ParticleSystem potionParticle;
     public ParticleSystem failParticle;
@@ -70,6 +72,7 @@ public class Cauldron : MonoBehaviour
                     }
                 }
                 failParticle.Play();
+                failureSource.Play();
                 ingredientsInCauldron = new List<Ingredient.IngredientType>();
             }
         }
