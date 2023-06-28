@@ -1,8 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
 
@@ -19,9 +16,6 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
     private Vector3 heldObjVel;
     float heldObjDist = 0.0f;
 
-    public LayerMask pickupLayer;
-    public LayerMask shelfObjLayer;
-
     public float smoothDampStrength = 1.0f;
 
     public float pickupRange = 1.5f;
@@ -36,44 +30,27 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
 
     XRSimpleInteractable currentHovered;
 
-    PlayerInput playerInput;
-    InputActionMap map;
+    public PlayerInput playerInput;
 
     private void Start()
     {
-        map = playerInput.actions.FindActionMap("XRI RightHand Interaction");
+        playerInput.actions.FindActionMap("XRI RightHand Interaction").FindAction("Translate Anchor").performed +=
+            callback =>
+            {
+                if (heldObjRb == null) return;
+
+                Vector2 value = callback.ReadValue<Vector2>();
+
+                heldObjDist += value.y * distanceAdjustmentSpeed * Time.deltaTime;
+
+                if (heldObjDist > maxAdjustment) heldObjDist = maxAdjustment;
+                if (heldObjDist < minAdjustment) heldObjDist = minAdjustment;
+            };
     }
 
     private void Update()
     {
-
-        RaycastHit hit;
-        if (Physics.Raycast(wandTip.position, wandTip.forward, out hit, pickupRange, shelfObjLayer.value))
-        {
-            currentHovered = hit.transform.GetComponent<XRSimpleInteractable>();
-            currentHovered.hoverEntered.Invoke(new HoverEnterEventArgs());
-        }
-        else
-        {
-            if (currentHovered != null) currentHovered.hoverExited.Invoke(new HoverExitEventArgs());
-        }
-
         if (heldObjRb == null) return;
-
-        const float deadzone = 0.1f;
-
-        heldObjDist += Stick.y * distanceAdjustmentSpeed * Time.deltaTime;
-
-        if (Stick.y > deadzone && heldObjRb != null)
-        {
-            // if value is greater than 0 increase the current distance.
-            if (heldObjDist > maxAdjustment) heldObjDist = maxAdjustment;
-        }
-        else
-        {
-            // if value is less than 0 decrease the current distance.
-            if (heldObjDist < minAdjustment) heldObjDist = minAdjustment;
-        }
 
         if (atStart)
         {
@@ -91,15 +68,9 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
     {
         if (heldObjRb == null) return;
 
-        if (heldObjDist < minAdjustment) heldObjDist = minAdjustment;
-        else heldObjectAnchor.localPosition = new Vector3(0, 0, wandTip.localPosition.z + heldObjDist);
+        heldObjectAnchor.localPosition = new Vector3(0, 0, wandTip.localPosition.z + heldObjDist);
 
         heldObjRb.position = Vector3.SmoothDamp(heldObjRb.position, heldObjectAnchor.position, ref heldObjVel, smoothDampStrength * Time.fixedDeltaTime);
-    }
-
-    public void Joystick()
-    {
-
     }
 
     public void OnSelectEntered(SelectEnterEventArgs args)
@@ -117,14 +88,14 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
             obj = args.interactableObject.transform.gameObject;
         }
 
-        heldObjRb = obj.GetComponent<Rigidbody>();
+        if (obj.TryGetComponent(out heldObjRb))
+        {
+            heldObjDist = Vector3.Distance(wandTip.position, heldObjRb.position);
 
-        heldObjDist = Vector3.Distance(wandTip.position, heldObjRb.position);
+            particleEmmiter.SetActive(true);
 
-        particleEmmiter.SetActive(true);
-
-        heldObjRb.useGravity = false;
-
+            heldObjRb.useGravity = false;
+        }
     }
     public void OnSelectExited(SelectExitEventArgs args)
     {
@@ -133,10 +104,13 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
             heldIngredient.PlaySoundOnCollision(true);
             heldIngredient = null;
         }
-        particleEmmiter.SetActive(false);
+        if (heldObjRb!= null)
+        {
+            particleEmmiter.SetActive(false);
 
-        heldObjRb.velocity = heldObjVel;
-        heldObjRb.useGravity = true;
-        heldObjRb = null;
+            heldObjRb.velocity = heldObjVel;
+            heldObjRb.useGravity = true;
+            heldObjRb = null;
+        }
     }
 }

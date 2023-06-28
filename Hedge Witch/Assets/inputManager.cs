@@ -15,7 +15,6 @@ public class inputManager : MonoBehaviour
     public XRRayInteractor rightXRRayInteractor;
     public XRRayInteractor leftXRRayInteractor;
     
-
     bool wandInRightHand = true;
 
     // Start is called before the first frame update

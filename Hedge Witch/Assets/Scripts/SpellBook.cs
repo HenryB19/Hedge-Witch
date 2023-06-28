@@ -9,18 +9,23 @@ public class SpellBook : MonoBehaviour
 
     int currentPage = 0;
 
+    private void Start()
+    {
+        material.SetFloat("_page", 0);
+    }
+
     public void TurnPage(bool direction)
     {
         if (direction)
         {
-            currentPage++;
+            if (currentPage == 2) currentPage = 2;
+            else currentPage++;
         }
         else
         {
-            currentPage--;
+            if (currentPage == 0) currentPage = 0;
+            else currentPage--;
         }
-        if (currentPage == 3) currentPage = 0;
-        else if (currentPage == -1) currentPage = 2;
         material.SetFloat("_page", currentPage);
     }
 }

@@ -11,6 +11,7 @@ public class IngredientCut : MonoBehaviour
     public GameObject ingredientHalf1;
     public GameObject ingredientHalf2;
     public GameObject ingredientWhole;
+    public AudioSource cutSound;
     public float ingredientTerminationHeight;
     bool cut = false;
     public float cutForceScale;
@@ -73,6 +74,8 @@ public class IngredientCut : MonoBehaviour
             half2.AddForceAtPosition((-forceDirection + -randomVariation) * cutForceScale, ingredientHalf2.transform.position);
 
             shelfData.ingredientList[ingredientType] += 1;
+
+            cutSound.Play();
 
             Destroy(ingredientHalf1, 2.5f);
             Destroy(ingredientHalf2, 2.5f);
