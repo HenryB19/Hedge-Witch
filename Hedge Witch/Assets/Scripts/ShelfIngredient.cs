@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class ShelfIngredient : MonoBehaviour
 {
     public GameObject PrefabToInstantiate;
-  
+
     ShelfData shelf;
 
     private void Start()

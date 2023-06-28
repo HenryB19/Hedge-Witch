@@ -1,9 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
 
-public class WandGrabSystem : MonoBehaviour, IPickupInputListener
+public class WandGrabSystem : MonoBehaviour
 {
     public GameObject particleEmmiter;
     bool atStart;
@@ -24,11 +25,6 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
     public float minAdjustment = 0.1f;
 
     public float distanceAdjustmentSpeed = 1.0f;
-    
-    public Vector2 Stick { get; set; }
-    public float Trigger { get; set; }
-
-    XRSimpleInteractable currentHovered;
 
     public PlayerInput playerInput;
 
@@ -104,7 +100,7 @@ public class WandGrabSystem : MonoBehaviour, IPickupInputListener
             heldIngredient.PlaySoundOnCollision(true);
             heldIngredient = null;
         }
-        if (heldObjRb!= null)
+        if (heldObjRb != null)
         {
             particleEmmiter.SetActive(false);
 

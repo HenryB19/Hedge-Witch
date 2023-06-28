@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 234124712064953746}
   - component: {fileID: 4342415204628516987}
   - component: {fileID: 7308294177387097335}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: dankPotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,8 +94,8 @@ GameObject:
   - component: {fileID: 1205599281214247649}
   - component: {fileID: 1078469576591321446}
   - component: {fileID: 7347564533466980162}
-  - component: {fileID: 8035669869804212693}
-  m_Layer: 7
+  - component: {fileID: 3165823857598590693}
+  m_Layer: 6
   m_Name: GoodPotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.27, y: 0.48, z: 0.27}
   m_Center: {x: 0, y: 0.13, z: 0}
---- !u!114 &8035669869804212693
+--- !u!114 &3165823857598590693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 3897688645069304797}
   - component: {fileID: 2701063772871798340}
   - component: {fileID: 2434704716708315278}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: dankPotionFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -21,8 +21,6 @@ public class IngredientCut : MonoBehaviour
     {
         // I believe there should be a way to pass in a reference when instantiating an object should in theory be better than running Find.
         shelfData = GameObject.Find("Shelf").GetComponent<ShelfData>();
-
-
     }
 
     void Update()

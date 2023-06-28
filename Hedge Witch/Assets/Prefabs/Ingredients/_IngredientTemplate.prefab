@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 8564718821079138685}
   - component: {fileID: 5798893234236001624}
   - component: {fileID: -6325532539207262306}
-  - component: {fileID: -7873784542122228386}
-  m_Layer: 7
+  - component: {fileID: -5465613186216577720}
+  m_Layer: 6
   m_Name: _IngredientTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-7873784542122228386
+--- !u!114 &-5465613186216577720
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

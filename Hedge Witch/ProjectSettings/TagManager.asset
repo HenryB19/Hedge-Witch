@@ -14,11 +14,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
   - Interactable
-  - KnifeBlade
   - ShelfIngredient
-  - CuttableIngredient
+  - KnifeBlade
+  - CuttableIngredients
+  - SpellBook
   - 
   - 
   - 
