@@ -3,9 +3,9 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 public class Cauldron : MonoBehaviour
 {
-    private List<Ingredient.IngredientType> ingredientsInCauldron = new List<Ingredient.IngredientType>();
+    private List<Ingredient.IngredientType> ingredientsInCauldron = new();
 
-    public List<Recipe> recipes = new List<Recipe>();
+    public List<Recipe> recipes = new();
 
     public Transform lovePotionSpawnPoint;
     public Transform sleepPotionSpawnPoint;
@@ -32,16 +32,18 @@ public class Cauldron : MonoBehaviour
             splashParticle.Play();
             splashSource.Play();
 
-            other.gameObject.SetActive(false); // CHANGE TO DESTROY
+            Destroy(other.gameObject);
             ingredientsInCauldron.Add(ingredient.type);
             if (ingredientsInCauldron.Count == 3)
             {
                 for (int r = 0; r < 3; r++)
                 {
-                    List<Ingredient.IngredientType> recipeIngredients = new List<Ingredient.IngredientType>();
-                    recipeIngredients.Add(recipes[r].ingredient1Type);
-                    recipeIngredients.Add(recipes[r].ingredient2Type);
-                    recipeIngredients.Add(recipes[r].ingredient3Type);
+                    List<Ingredient.IngredientType> recipeIngredients = new()
+                    {
+                        recipes[r].ingredient1Type,
+                        recipes[r].ingredient2Type,
+                        recipes[r].ingredient3Type
+                    };
                     recipeIngredients.Sort();
                     ingredientsInCauldron.Sort();
 
@@ -76,7 +78,7 @@ public class Cauldron : MonoBehaviour
         }
         else
         {
-            Vector3 dir = new Vector3(Random.Range(-1, 1), Random.Range(0.5f, 1), Random.Range(-1, 1));
+            Vector3 dir = new(Random.Range(-1, 1), Random.Range(0.5f, 1), Random.Range(-1, 1));
             other.attachedRigidbody.AddForce(dir * 10, ForceMode.Impulse);
         }
     }

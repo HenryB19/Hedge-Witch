@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DemonFlesh
       objectReference: {fileID: 0}
+    - target: {fileID: 8564718821079138685, guid: 3237b6d650043c040b0cf5053a43171d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8564718821079138686, guid: 3237b6d650043c040b0cf5053a43171d, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -99,7 +103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 49bb80e4f645cfd48b87ebfa36d4d341, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.28
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 49bb80e4f645cfd48b87ebfa36d4d341, type: 3}
       propertyPath: m_LocalPosition.z
