@@ -140,6 +140,10 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 75400fd2b19507b46a9b5471e9bddf6e, type: 2}
   - {fileID: -382415946882454809, guid: e8cd6a973c291ba4f9ba241111993879, type: 2}
   - {fileID: 7465117203806029009, guid: 61312b92fc88cec48a7e9eef44f3116a, type: 2}
@@ -277,7 +281,14 @@ PlayerSettings:
   AndroidMinifyDebug: 0
   AndroidValidateAppBundleSize: 1
   AndroidAppBundleSizeToValidate: 150
-  m_BuildTargetIcons: []
+  m_BuildTargetIcons:
+  - m_BuildTarget: 
+    m_Icons:
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: a4ebc4cdccd78bc41a7dcadbaf480fa4, type: 3}
+      m_Width: 128
+      m_Height: 128
+      m_Kind: 0
   m_BuildTargetPlatformIcons:
   - m_BuildTarget: iPhone
     m_Icons:
